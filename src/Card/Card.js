@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Card.css';
 
-const card = ( props ) => {
+const Сard = ( props ) => {
   return (
     <div className="card">
       <h3 className="card-title">{props.caption}</h3>
@@ -12,4 +12,4 @@ const card = ( props ) => {
   )
 };
 
-export default card;
+export default Сard;
