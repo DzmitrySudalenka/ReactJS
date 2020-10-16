@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-
+import classNames from 'classnames';
 import './Card.css';
 
 const Сard = ( props ) => {
 
   const [cardState, setCardState] = useState({
-    isStyleChanged: false
+    isChecked: false
   });
 
   const changeStyleHandler = (event) => {
     setCardState({
-      isStyleChanged: event.target.checked
+      isChecked: event.target.checked
     });
   };
 
   return (
-    <div className={`card ${cardState.isStyleChanged ? 'dark' : ''}`}>
+    <div className={classNames('card', {dark: cardState.isChecked})}>
       <div className="card-title-wrap">
         <h3 className="card-title">{props.caption}</h3>
-        <input type="checkbox" onChange={changeStyleHandler}/>
+        <input type="checkbox" checked={cardState.isChecked} onChange={changeStyleHandler}/>
       </div>
       <hr className="card-sep"/>
       <p className="card-text">{props.children}</p>
