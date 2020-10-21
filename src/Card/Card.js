@@ -1,84 +1,129 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { FaEdit, FaSave, FaRegWindowClose } from 'react-icons/fa';
 import './Card.css';
 
-const Card = ({caption, children: text}) => {
+class Card extends Component {
 
-  const [isChecked, setIsChecked] = useState(false);
+  constructor(props) {
 
-  const [isEdit, setIsEdit] = useState(false);
+    super(props);
 
-  const [titleVal, setTitleVal] = useState(caption);
+    const {caption, children: text} = props;
 
-  const [textVal, setTextVal] = useState(text);
+    this.state = {
+      isChecked: false,
+      isEdit: false,
+      titleVal: caption,
+      textVal: text,
+      editTitleVal: caption,
+      editTextVal: text,
+    };
 
-  const [editTitleVal, setEditTitleVal] = useState(caption);
+  }
 
-  const [editTextVal, setEditTextVal] = useState(text);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.isView && this.state.isEdit) {
+      this.cancelHandler();
+    }
+  }
 
-  const changeStyleHandler = (event) => {
-    setIsChecked(event.target.checked);
+  changeStyleHandler = (event) => {
+    this.setState({isChecked: event.target.checked});
   };
 
-  const editHandler = () => {
-    setIsEdit(true);
-    setIsChecked(false);
+  editHandler = () => {
+    this.setState({
+      isChecked: false,
+      isEdit: true
+    });
   }
 
-  const saveHandler = () => {
-    setIsEdit(false);
-    setTitleVal(editTitleVal);
-    setTextVal(editTextVal);
+  saveHandler = () => {
+    this.setState({
+      isEdit: false,
+      titleVal: this.state.editTitleVal,
+      textVal: this.state.editTextVal
+    });
   }
 
-  const cancelHandler = () => {
-    setIsEdit(false);
-    setEditTitleVal(titleVal);
-    setEditTextVal(textVal);
+  cancelHandler = () => {
+    this.setState({
+      isEdit: false,
+      editTitleVal: this.state.titleVal,
+      editTextVal: this.state.textVal
+    });
   }
 
-  const titleHandler = (event) => {
-    setEditTitleVal(event.target.value);
+  titleHandler = (event) => {
+    this.setState({
+      editTitleVal: event.target.value
+    });
   }
 
-  const textHandler = (event) => {
-    setEditTextVal(event.target.value);
+  textHandler = (event) => {
+    this.setState({
+      editTextVal: event.target.value
+    });
   }
 
-  let cardTitle = <h3 className="card-title">{titleVal}</h3>;
+  render() {
 
-  let cardControls = <div className="card-controls">
-    <FaEdit className="card-control" onClick={editHandler} />
-    <input type="checkbox" className="card-control" checked={isChecked} onChange={changeStyleHandler}/>
-  </div>;
+    const {isView} = this.props;
 
-  let cardText = textVal;
+    let cardTitle = <h3 className="card-title">{this.state.titleVal}</h3>;
 
-  if (isEdit) {
+    let editControl;
 
-    cardTitle = <input className="card-input-title" type="text" value={editTitleVal} onChange={titleHandler}/>;
+    if (!isView) {
 
-    cardControls = <div className="card-controls">
-      <FaSave className="card-control" onClick={saveHandler} />
-      <FaRegWindowClose className="card-control" onClick={cancelHandler} />
+      editControl = <FaEdit className="card-control" onClick={this.editHandler} />;
+
+    }
+
+    let cardControls = <div className="card-controls">
+      {editControl}
+      <input
+        type="checkbox"
+        className="card-control"
+        checked={this.state.isChecked}
+        onChange={this.changeStyleHandler}
+      />
     </div>;
 
-    cardText = <textarea value={editTextVal} onChange={textHandler}/>;
+    let cardText = this.state.textVal;
+
+    if (this.state.isEdit && !isView) {
+
+      cardTitle = <input
+        className="card-input-title"
+        type="text"
+        value={this.state.editTitleVal}
+        onChange={this.titleHandler}
+      />;
+
+      cardControls = <div className="card-controls">
+        <FaSave className="card-control" onClick={this.saveHandler} />
+        <FaRegWindowClose className="card-control" onClick={this.cancelHandler} />
+      </div>;
+
+      cardText = <textarea value={this.state.editTextVal} onChange={this.textHandler}/>;
+
+    }
+
+    return (
+      <div className={classNames('card', {dark: this.state.isChecked})}>
+        <div className="card-title-wrap">
+          {cardTitle}
+          {cardControls}
+        </div>
+        <hr className="card-sep"/>
+        <p className="card-text">{cardText}</p>
+      </div>
+    );
 
   }
 
-  return (
-    <div className={classNames('card', {dark: isChecked})}>
-      <div className="card-title-wrap">
-        {cardTitle}
-        {cardControls}
-      </div>
-      <hr className="card-sep"/>
-      <p className="card-text">{cardText}</p>
-    </div>
-  );
-
-};
+}
 
 export default Card;
