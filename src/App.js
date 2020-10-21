@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import Card from './Card';
+import Checkbox from "./Checkbox";
 
 function App() {
 
@@ -106,8 +107,11 @@ function App() {
         <h1>ReactJS header</h1>
       </header>
       <label className="view">
-        <input type="checkbox" className="view-control" checked={isView} onChange={viewHandler}/>
-        Только просмотр
+        <Checkbox
+          checked={isView}
+          onChange={viewHandler}
+        />
+        <span className="view-text">Только просмотр</span>
       </label>
       <main className="App-content">
         {cards.map((card) => {
