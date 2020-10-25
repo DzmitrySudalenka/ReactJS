@@ -11,11 +11,26 @@
   display: flex;
   flex-wrap: wrap;
 }
-.view {
+.app-controls {
+  display: flex;
+}
+.app-control {
   font-weight: bold;
   margin-left: 20px;
   user-select: none;
+  display: flex;
+  align-items: center;
 }
-.view-text {
+.app-control-checkbox-view {
+  position: relative;
+  top: 3px;
+}
+.app-control-icon {
+  color: salmon;
+}
+.app-control-icon-remove {
+  font-size: 20px;
+}
+.app-control-text {
   margin-left: 10px;
 }

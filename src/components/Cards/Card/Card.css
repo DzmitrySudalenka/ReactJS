@@ -1,0 +1,30 @@
+.card {
+  display: inline-block;
+  margin: 20px;
+  padding: 5px 20px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: .25rem;
+  width: 445px;
+  min-height: 315px;
+}
+.card-sep {
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+.card.dark {
+  background-color: #222;
+  color: #fff
+}
+.card input,
+.card textarea {
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  padding: 10px;
+}
+.card input[type="text"]:focus,
+.card textarea:focus {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px #ccc;
+  outline: none;
+}
