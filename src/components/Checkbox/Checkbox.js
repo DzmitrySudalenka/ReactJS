@@ -33,7 +33,7 @@ const StyledCheckbox = styled.div`
   border-radius: 3px;
   transition: all 150ms;
 
-  ${HiddenCheckbox}:focus + & {
+  ${HiddenCheckbox} + & {
     box-shadow: 0 0 0 3px pink;
   }
 
