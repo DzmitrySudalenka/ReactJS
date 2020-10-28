@@ -13,7 +13,6 @@ class Card extends Component {
     const {title, children: text} = props;
 
     this.state = {
-      isEdit: false,
       editTitleVal: title,
       editTextVal: text
     };
@@ -21,7 +20,7 @@ class Card extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.isView && this.state.isEdit) {
+    if (this.props.isView && this.props.isEdit) {
       this.cancelHandler();
     }
   }
@@ -34,19 +33,13 @@ class Card extends Component {
     this.setState({editTextVal: event.target.value});
   }
 
-  editHandler = () => {
-    this.setState({isEdit: true});
-    this.props.uncheckCard();
-  }
-
   saveHandler = () => {
-    this.setState({isEdit: false});
     this.props.changeContent(this.state.editTitleVal, this.state.editTextVal);
   }
 
   cancelHandler = () => {
+    this.props.editHandler(false);
     this.setState({
-      isEdit: false,
       editTitleVal: this.props.title,
       editTextVal: this.props.children
     });
@@ -54,7 +47,7 @@ class Card extends Component {
 
   render() {
 
-    const {title, children: text, isView, isChecked, checkHandler} = this.props;
+    const {title, children: text, isView, isChecked, isEdit, checkHandler, editHandler} = this.props;
 
     return (
       <div className={classNames('card', {dark: isChecked})}>
@@ -63,10 +56,10 @@ class Card extends Component {
           editTitle={this.state.editTitleVal}
           isView={isView}
           isChecked={isChecked}
-          isEdit={this.state.isEdit}
+          isEdit={isEdit}
           editTitleHandler={this.editTitleHandler}
           checkHandler={checkHandler}
-          editHandler={this.editHandler}
+          editHandler={editHandler}
           saveHandler={this.saveHandler}
           cancelHandler={this.cancelHandler}
         />
@@ -74,7 +67,7 @@ class Card extends Component {
         <CardBody
           text={text}
           editText={this.state.editTextVal}
-          isEdit={this.state.isEdit}
+          isEdit={isEdit}
           editTextHandler={this.editTextHandler}
         />
       </div>

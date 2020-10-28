@@ -28,6 +28,11 @@
 .app-control-icon {
   color: salmon;
 }
+.app-control-icon-add {
+  font-size: 22px;
+  position: relative;
+  top: 1px;
+}
 .app-control-icon-remove {
   font-size: 20px;
 }
