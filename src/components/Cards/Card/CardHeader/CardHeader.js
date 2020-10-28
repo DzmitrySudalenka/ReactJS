@@ -34,6 +34,7 @@ const CardHeader = (props) => {
       type="text"
       value={editTitle}
       onChange={editTitleHandler}
+      autoFocus
     />;
 
     cardControls = <div className="card-controls">
