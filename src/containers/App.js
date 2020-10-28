@@ -133,13 +133,12 @@ class App extends Component {
       isChecked: false,
       isEdit: true
     };
-    const cards = [...this.state.cards];
-    cards.unshift(newCard);
+    const cards = [newCard, ...this.state.cards];
     this.setState({cards: cards});
   }
 
   deleteHandler = () => {
-    const cards = [...this.state.cards].filter(card => !card.isChecked);
+    const cards = this.state.cards.filter(card => !card.isChecked);
     this.setState({cards: cards});
   }
 
