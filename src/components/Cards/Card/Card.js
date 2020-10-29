@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import './Card.css';
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
+import withLoadingDelay from "../../../hoc";
 
 class Card extends Component {
 
@@ -77,4 +78,4 @@ class Card extends Component {
 
 }
 
-export default Card;
+export default withLoadingDelay(Card);

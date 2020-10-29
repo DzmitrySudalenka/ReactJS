@@ -1,0 +1,11 @@
+.card-wrap {
+  display: flex;
+  justify-content: center;
+  width: 487px;
+  min-height: 327px;
+  margin: 20px;
+}
+.card-loader {
+  align-self: center;
+  justify-self: center;
+}
