@@ -1,20 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import CardsContext from "../../../../context";
 import {FaEdit, FaSave, FaRegWindowClose} from 'react-icons/fa';
 import './CardHeader.css';
 
 const CardHeader = (props) => {
 
-  const {title, editTitle, isView, isChecked, isEdit, editTitleHandler, checkHandler, editHandler,
-    saveHandler, cancelHandler} = props;
+  const {title, editTitle, isChecked, isEdit, editTitleHandler, check, edit, save, cancel} = props;
+
+  const cardsContext = useContext(CardsContext);
 
   let cardTitle = <h3 className="card-title">{title}</h3>;
 
   let editControl;
 
-  if (!isView) {
-
-    editControl = <FaEdit className="card-control" onClick={editHandler} />;
-
+  if (!cardsContext.isView) {
+    editControl = <FaEdit className="card-control" onClick={edit} />;
   }
 
   let cardControls = <div className="card-controls">
@@ -23,7 +23,7 @@ const CardHeader = (props) => {
       type="checkbox"
       className="card-control"
       checked={isChecked}
-      onChange={checkHandler}
+      onChange={check}
     />
   </div>;
 
@@ -38,8 +38,8 @@ const CardHeader = (props) => {
     />;
 
     cardControls = <div className="card-controls">
-      <FaSave className="card-control" onClick={saveHandler} />
-      <FaRegWindowClose className="card-control" onClick={cancelHandler} />
+      <FaSave className="card-control" onClick={save} />
+      <FaRegWindowClose className="card-control" onClick={cancel} />
     </div>;
 
   }

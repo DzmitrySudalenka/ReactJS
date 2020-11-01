@@ -1,11 +1,11 @@
-.card-wrap {
+.with-loading-delay-wrap {
   display: flex;
   justify-content: center;
   width: 487px;
   min-height: 327px;
   margin: 20px;
 }
-.card-loader {
+.with-loading-delay-loader {
   align-self: center;
   justify-self: center;
 }

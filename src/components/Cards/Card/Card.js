@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import './Card.css';
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc";
+import CardsContext from "../../../context";
+import './Card.css';
 
 class Card extends Component {
 
@@ -20,8 +22,10 @@ class Card extends Component {
 
   }
 
+  static contextType = CardsContext;
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.isView && this.props.isEdit) {
+    if (this.context.isView && this.props.isEdit) {
       this.cancelHandler();
     }
   }
@@ -35,11 +39,11 @@ class Card extends Component {
   }
 
   saveHandler = () => {
-    this.props.changeContent(this.state.editTitleVal, this.state.editTextVal);
+    this.props.change(this.state.editTitleVal, this.state.editTextVal);
   }
 
   cancelHandler = () => {
-    this.props.editHandler(false);
+    this.props.edit(null, false);
     this.setState({
       editTitleVal: this.props.title,
       editTextVal: this.props.children
@@ -48,21 +52,20 @@ class Card extends Component {
 
   render() {
 
-    const {title, children: text, isView, isChecked, isEdit, checkHandler, editHandler} = this.props;
+    const {title, children: text, isChecked, isEdit, check, edit} = this.props;
 
     return (
       <div className={classNames('card', {dark: isChecked})}>
         <CardHeader
           title={title}
           editTitle={this.state.editTitleVal}
-          isView={isView}
           isChecked={isChecked}
           isEdit={isEdit}
           editTitleHandler={this.editTitleHandler}
-          checkHandler={checkHandler}
-          editHandler={editHandler}
-          saveHandler={this.saveHandler}
-          cancelHandler={this.cancelHandler}
+          check={check}
+          edit={edit}
+          save={this.saveHandler}
+          cancel={this.cancelHandler}
         />
         <hr className="card-sep"/>
         <CardBody
@@ -76,6 +79,17 @@ class Card extends Component {
 
   }
 
+}
+
+Card.propTypes = {
+  change: PropTypes.func,
+  check: PropTypes.func,
+  children: PropTypes.string,
+  edit: PropTypes.func,
+  isChecked: PropTypes.bool,
+  isEdit: PropTypes.bool,
+  title: PropTypes.string,
+  uncheck: PropTypes.func
 }
 
 export default withLoadingDelay(Card);
