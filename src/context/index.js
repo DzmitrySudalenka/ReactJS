@@ -1,3 +1,3 @@
-import cardsContext from "./cards-context";
+import { CardContext, CardContextProvider, CardContextConsumer } from "./card-context";
 
-export default cardsContext;
+export { CardContext, CardContextProvider, CardContextConsumer };

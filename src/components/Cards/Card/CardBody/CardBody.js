@@ -3,13 +3,13 @@ import './CardBody.css';
 
 const CardBody = (props) => {
 
-  const {text, editText, isEdit, editTextHandler} = props;
+  const {text, isEdit, textHandler} = props;
 
   let cardText = text;
 
   if (isEdit) {
 
-    cardText = <textarea value={editText} onChange={editTextHandler}/>;
+    cardText = <textarea value={text} onChange={textHandler}/>;
 
   }
 
