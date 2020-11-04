@@ -1,53 +1,55 @@
-import React from 'react';
+import React, {Fragment, useContext} from 'react';
+import {CardContext} from "../../../../context";
 import {FaEdit, FaSave, FaRegWindowClose} from 'react-icons/fa';
 import './CardHeader.css';
 
 const CardHeader = (props) => {
 
-  const {title, editTitle, isView, isChecked, isEdit, editTitleHandler, checkHandler, editHandler,
-    saveHandler, cancelHandler} = props;
+  const {title, isEdit, isChecked, titleHandler, onCheck, onEdit, onSave, onCancel} = props;
+
+  const cardContext = useContext(CardContext);
 
   let cardTitle = <h3 className="card-title">{title}</h3>;
 
   let editControl;
 
-  if (!isView) {
-
-    editControl = <FaEdit className="card-control" onClick={editHandler} />;
-
+  if (!cardContext.onlyView) {
+    editControl = <FaEdit className="card-control" onClick={onEdit} />;
   }
 
-  let cardControls = <div className="card-controls">
+  let cardControls = <Fragment>
     {editControl}
     <input
       type="checkbox"
       className="card-control"
       checked={isChecked}
-      onChange={checkHandler}
+      onChange={onCheck}
     />
-  </div>;
+  </Fragment>;
 
   if (isEdit) {
 
     cardTitle = <input
       className="card-input-title"
       type="text"
-      value={editTitle}
-      onChange={editTitleHandler}
+      value={title}
+      onChange={titleHandler}
       autoFocus
     />;
 
-    cardControls = <div className="card-controls">
-      <FaSave className="card-control" onClick={saveHandler} />
-      <FaRegWindowClose className="card-control" onClick={cancelHandler} />
-    </div>;
+    cardControls = <Fragment>
+      <FaSave className="card-control" onClick={onSave} />
+      <FaRegWindowClose className="card-control" onClick={onCancel} />
+    </Fragment>;
 
   }
 
   return (
     <div className="card-title-wrap">
       {cardTitle}
-      {cardControls}
+      <div className="card-controls">
+        {cardControls}
+      </div>
     </div>
   );
 

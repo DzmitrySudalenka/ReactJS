@@ -6,6 +6,11 @@
   border: 1px solid #eee;
   box-shadow: 0 0 10px #ccc;
   border-radius: .25rem;
+  display: flex;
+  align-items: center;
+}
+.App-header-title {
+  flex-grow: 1;
 }
 .App-content {
   display: flex;
@@ -38,4 +43,15 @@
 }
 .app-control-text {
   margin-left: 10px;
+}
+.cards-counter {
+  color: #fff;
+  background-color: #6c757d;
+  padding: .16em .4em .25em .4em;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: .25rem;
+  transition: color .15s;
+  position: relative;
+  top: 6px;
 }

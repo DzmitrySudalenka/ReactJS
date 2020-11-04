@@ -1,81 +1,94 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import './Card.css';
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc";
+import {CardContext} from "../../../context";
+import './Card.css';
 
 class Card extends Component {
 
   constructor(props) {
-
     super(props);
-
-    const {title, children: text} = props;
-
+    const {title, text} = props;
     this.state = {
-      editTitleVal: title,
-      editTextVal: text
+      isEdit: false,
+      isChecked: false,
+      title: title,
+      text: text
     };
-
   }
 
+  static contextType = CardContext;
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.isView && this.props.isEdit) {
+    if (this.context.onlyView && this.state.isEdit) {
       this.cancelHandler();
     }
   }
 
-  editTitleHandler = (event) => {
-    this.setState({editTitleVal: event.target.value});
+  titleHandler = (event) => {
+    this.setState({title: event.target.value});
   }
 
-  editTextHandler = (event) => {
-    this.setState({editTextVal: event.target.value});
+  textHandler = (event) => {
+    this.setState({text: event.target.value});
+  }
+
+  editHandler = () => {
+    this.setState({isEdit: true, isChecked: false});
+  }
+
+  checkHandler = () => {
+    this.setState({isChecked: !this.state.isChecked});
+    this.props.removeCard(!this.state.isChecked);
   }
 
   saveHandler = () => {
-    this.props.changeContent(this.state.editTitleVal, this.state.editTextVal);
+    this.setState({
+      isEdit: false
+    });
   }
 
   cancelHandler = () => {
-    this.props.editHandler(false);
     this.setState({
-      editTitleVal: this.props.title,
-      editTextVal: this.props.children
+      isEdit: false,
+      title: this.props.title,
+      text: this.props.text
     });
   }
 
   render() {
 
-    const {title, children: text, isView, isChecked, isEdit, checkHandler, editHandler} = this.props;
-
     return (
-      <div className={classNames('card', {dark: isChecked})}>
+      <div className={classNames('card', {dark: this.state.isChecked})}>
         <CardHeader
-          title={title}
-          editTitle={this.state.editTitleVal}
-          isView={isView}
-          isChecked={isChecked}
-          isEdit={isEdit}
-          editTitleHandler={this.editTitleHandler}
-          checkHandler={checkHandler}
-          editHandler={editHandler}
-          saveHandler={this.saveHandler}
-          cancelHandler={this.cancelHandler}
+          title={this.state.title}
+          isEdit={this.state.isEdit}
+          isChecked={this.state.isChecked}
+          titleHandler={this.titleHandler}
+          onEdit={this.editHandler}
+          onCheck={this.checkHandler}
+          onSave={this.saveHandler}
+          onCancel={this.cancelHandler}
         />
         <hr className="card-sep"/>
         <CardBody
-          text={text}
-          editText={this.state.editTextVal}
-          isEdit={isEdit}
-          editTextHandler={this.editTextHandler}
+          text={this.state.text}
+          isEdit={this.state.isEdit}
+          textHandler={this.textHandler}
         />
       </div>
     );
 
   }
 
+}
+
+Card.propTypes = {
+  title: PropTypes.string,
+  text: PropTypes.string
 }
 
 export default withLoadingDelay(Card);

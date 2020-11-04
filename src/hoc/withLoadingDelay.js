@@ -14,14 +14,14 @@ const withLoadingDelay = (WrappedComponent) => {
       }, 2000);
     });
 
-    let cardContent = <Loader type="Oval" color="salmon" height={80} className="card-loader" />;
+    let cardContent = <Loader type="Oval" color="salmon" height={80} className="with-loading-delay-loader" />;
 
     if (!isLoading) {
       cardContent = <WrappedComponent {...props}/>;
     }
 
     return (
-      <div className="card-wrap">
+      <div className="with-loading-delay-wrap">
         {cardContent}
       </div>
     );
