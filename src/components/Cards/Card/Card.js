@@ -46,9 +46,7 @@ class Card extends Component {
   }
 
   saveHandler = () => {
-    this.setState({
-      isEdit: false
-    });
+    this.setState({isEdit: false});
   }
 
   cancelHandler = () => {
@@ -88,7 +86,8 @@ class Card extends Component {
 
 Card.propTypes = {
   title: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  removeCard: PropTypes.func
 }
 
 export default withLoadingDelay(Card);
