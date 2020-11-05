@@ -1,0 +1,28 @@
+.cards-page-controls {
+  display: flex;
+}
+.cards-page-control {
+  font-weight: bold;
+  margin-left: 20px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+.cards-page-control-checkbox-view {
+  position: relative;
+  top: 3px;
+}
+.cards-page-control-icon {
+  color: salmon;
+}
+.cards-page-control-icon-add {
+  font-size: 22px;
+  position: relative;
+  top: 1px;
+}
+.cards-page-control-icon-remove {
+  font-size: 20px;
+}
+.cards-page-control-text {
+  margin-left: 10px;
+}

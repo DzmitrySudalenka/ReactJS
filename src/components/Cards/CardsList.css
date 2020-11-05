@@ -1,0 +1,9 @@
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cards-list::after {
+  content: "";
+  flex: auto;
+}

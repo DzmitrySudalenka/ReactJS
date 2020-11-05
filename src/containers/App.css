@@ -1,50 +1,25 @@
 .App-header {
   text-align: center;
-  font-size: calc(10px + 2vmin);
   margin: 20px;
   padding: 0 20px;
   border: 1px solid #eee;
   box-shadow: 0 0 10px #ccc;
   border-radius: .25rem;
   display: flex;
+  flex-direction: column;
+}
+.App-header-title-wrap {
+  display: flex;
   align-items: center;
 }
 .App-header-title {
+  font-size: 48px;
   flex-grow: 1;
-}
-.App-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-.app-controls {
-  display: flex;
-}
-.app-control {
-  font-weight: bold;
-  margin-left: 20px;
-  user-select: none;
-  display: flex;
-  align-items: center;
-}
-.app-control-checkbox-view {
-  position: relative;
-  top: 3px;
-}
-.app-control-icon {
-  color: salmon;
-}
-.app-control-icon-add {
-  font-size: 22px;
-  position: relative;
-  top: 1px;
-}
-.app-control-icon-remove {
-  font-size: 20px;
-}
-.app-control-text {
-  margin-left: 10px;
+  margin: 20px 0 10px;
+  padding-left: 38px;
 }
 .cards-counter {
+  font-size: 22px;
   color: #fff;
   background-color: #6c757d;
   padding: .16em .4em .25em .4em;
@@ -53,5 +28,24 @@
   border-radius: .25rem;
   transition: color .15s;
   position: relative;
-  top: 6px;
+  top: 12px;
+}
+.main-nav-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.main-nav-list-item {
+  display: inline-block;
+  margin: 0 20px;
+}
+.main-nav-list-item-link {
+  font-size: 20px;
+  color: salmon;
+  font-weight: 500;
+  text-decoration: none;
+}
+.main-nav-list-item-link:hover,
+.main-nav-list-item-link.active {
+  text-decoration: underline;
 }

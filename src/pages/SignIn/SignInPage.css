@@ -1,0 +1,27 @@
+.sign-in-page {
+  display: flex;
+  justify-content: center;
+}
+.sign-in-page-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.sign-in-page-form-title {
+  text-align: center;
+}
+.sign-in-page-form-input {
+  margin-top: 20px;
+}
+.sign-in-page-form-btn {
+  font-size: 20px;
+  font-weight: 500;
+  color: salmon;
+  padding: 10px 40px;
+  margin-top: 20px;
+  background: none;
+  border: 2px solid salmon;
+  border-radius: 24px;
+  outline: none;
+  align-self: center;
+}
