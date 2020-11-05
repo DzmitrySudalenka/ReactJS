@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 const CardContext = React.createContext(undefined);
 const { Provider, Consumer } = CardContext;
 
 class CardContextProvider extends Component {
   state = {
-    cards: [
-      {id:'id1', headerText: 'Tab number One', bodyText: 'I expect some text here...'},
-      {id:'id2', headerText: 'Tab number Two', bodyText: 'I expect some text here...'},
-      {id:'id3', headerText: 'Tab number Three', bodyText: 'I expect some text here...'},
-      {id:'id4', headerText: 'Tab number Four', bodyText: 'I expect some text here...'},
-      {id:'id5', headerText: 'Tab number Five', bodyText: 'I expect some text here...'},
-      {id:'id6', headerText: 'Tab number Six', bodyText: 'I expect some text here...'},
-      {id:'id7', headerText: 'Tab number Seven', bodyText: 'I expect some text here...'}
-    ],
+    cards: [],
     onlyView: false
   };
 
   cardsToRemove = [];
+
+  componentDidMount() {
+    axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
+      .then(response => {
+        const cards = response.data.slice(0, 15);
+        const updatedCards = cards.map(card => {
+          return {
+            id: card.Number,
+            headerText: card.Name,
+            bodyText: card.About
+          }
+        });
+        this.setState({cards: updatedCards});
+      });
+  }
 
   checkBoxAppHandler = () => {
     this.setState({onlyView: !this.state.onlyView});
