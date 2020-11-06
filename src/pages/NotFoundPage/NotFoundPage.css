@@ -1,0 +1,14 @@
+.not-found-page {
+  margin-top: 100px;
+  text-align: center;
+}
+.not-found-page-title {
+  font-size: 88px;
+  margin: 0;
+}
+.not-found-page-desc {
+  color: salmon;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

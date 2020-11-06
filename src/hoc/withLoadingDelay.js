@@ -9,9 +9,10 @@ const withLoadingDelay = (WrappedComponent) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      setTimeout(() => {
+      const isLoadingTimer = setTimeout(() => {
         setIsLoading(false);
       }, 2000);
+      return () => { clearTimeout(isLoadingTimer) };
     });
 
     let cardContent = <Loader type="Oval" color="salmon" height={80} className="with-loading-delay-loader" />;

@@ -51,6 +51,16 @@ class CardContextProvider extends Component {
     }
   };
 
+  changeContentHandler = (id, title, text) => {
+    const cardIndex = this.state.cards.findIndex(card => card.id === id);
+    const card = {...this.state.cards[cardIndex]};
+    card.headerText = title;
+    card.bodyText = text;
+    const cards = [...this.state.cards];
+    cards[cardIndex] = card;
+    this.setState({cards: cards});
+  }
+
   removeCardHandler = () => {
     let cards = [...this.state.cards];
     cards = cards.filter(val => !this.cardsToRemove.includes(val.id));
@@ -65,6 +75,7 @@ class CardContextProvider extends Component {
         cardsCount: this.state.cards.length,
         onAdd: this.addCardHandler,
         onRemove: this.removeCardHandler,
+        changeContent: this.changeContentHandler,
         removeCard: this.cardsToRemoveHandler,
         onChange: this.checkBoxAppHandler
       }}

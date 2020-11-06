@@ -47,6 +47,7 @@ class Card extends Component {
 
   saveHandler = () => {
     this.setState({isEdit: false});
+    this.props.changeContent(this.state.title, this.state.text);
   }
 
   cancelHandler = () => {
