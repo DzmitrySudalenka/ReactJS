@@ -1,0 +1,20 @@
+.input-wrap {
+  margin-top: 20px;
+}
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  padding: 10px;
+}
+.input:focus {
+  box-shadow: 0 0 10px #ccc;
+  outline: none;
+}
+.invalid {
+  border-color: salmon;
+}
+.invalid:focus {
+  box-shadow: 0 0 10px salmon;
+}

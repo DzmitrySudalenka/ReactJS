@@ -16,7 +16,7 @@ class App extends Component {
               <Fragment>
                 <header className="App-header">
                   <div className="App-header-title-wrap">
-                    <h1 className="App-header-title">ReactJS header</h1>
+                    <h1 className="App-header-title">ReactJS</h1>
                     <div className="cards-counter">{context.cardsCount}</div>
                   </div>
                   <nav className="main-nav">

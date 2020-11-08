@@ -15,15 +15,12 @@
   background-color: #222;
   color: #fff
 }
-.card input,
-.card textarea {
+.card-input {
   border: 1px solid #ccc;
   border-radius: .25rem;
   padding: 10px;
 }
-.card input[type="text"]:focus,
-.card input[type="password"]:focus,
-.card textarea:focus {
+.card-input:focus {
   box-shadow: 0 0 10px #ccc;
   outline: none;
 }

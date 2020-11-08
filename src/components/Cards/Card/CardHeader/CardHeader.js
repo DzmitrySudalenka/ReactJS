@@ -30,7 +30,7 @@ const CardHeader = (props) => {
   if (isEdit) {
 
     cardTitle = <input
-      className="card-input-title"
+      className="card-input card-input-title"
       type="text"
       value={title}
       onChange={titleHandler}
