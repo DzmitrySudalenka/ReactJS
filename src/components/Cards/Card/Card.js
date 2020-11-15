@@ -59,7 +59,6 @@ class Card extends Component {
   }
 
   render() {
-
     return (
       <div className={classNames('card', {dark: this.state.isChecked})}>
         <CardHeader
@@ -80,7 +79,6 @@ class Card extends Component {
         />
       </div>
     );
-
   }
 
 }

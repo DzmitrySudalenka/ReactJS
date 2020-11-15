@@ -9,7 +9,7 @@ const CardBody = (props) => {
 
   if (isEdit) {
 
-    cardText = <textarea value={text} onChange={textHandler}/>;
+    cardText = <textarea value={text} onChange={textHandler} className="card-input"/>;
 
   }
 

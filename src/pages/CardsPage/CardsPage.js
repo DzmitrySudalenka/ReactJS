@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import CardsList from "../../components/Cards";
-import Checkbox from "../../components/Checkbox";
+import Checkbox from "../../components/UI/Checkbox";
 import {FaPlus, FaRegTrashAlt} from "react-icons/fa";
 import {CardContextConsumer} from "../../context";
 import "./CardsPage.css";
