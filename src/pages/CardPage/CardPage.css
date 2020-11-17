@@ -1,0 +1,36 @@
+.card-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-page-title {
+  font-size: 32px;
+  margin: 0;
+}
+.card-page .card {
+  margin-top: 25px;
+  min-height: 375px;
+}
+.card-page .card .card-input-title {
+  width: 100%;
+  box-sizing: border-box;
+}
+.card-page .card-title {
+  width: 100%;
+  text-align: center;
+}
+.card-page .card-text {
+  min-height: 183px;
+}
+.card-page .card textarea {
+  margin-top: 10px;
+}
+.card-page-loader {
+  margin-top: 100px;
+}
+.card-page-not-found {
+  color: salmon;
+  font-size: 32px;
+  font-weight: 500;
+  margin-top: 100px;
+}

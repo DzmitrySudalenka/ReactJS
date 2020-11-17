@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import withLoadingDelay from "../../../hoc";
-import {CardContext} from "../../../context";
+import {connect} from "react-redux";
 import './Card.css';
 
 class Card extends Component {
@@ -20,10 +20,8 @@ class Card extends Component {
     };
   }
 
-  static contextType = CardContext;
-
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.context.onlyView && this.state.isEdit) {
+    if (this.props.onlyView && this.state.isEdit) {
       this.cancelHandler();
     }
   }
@@ -58,9 +56,18 @@ class Card extends Component {
     });
   }
 
+  goCardPage = () => {
+    if (!this.state.isEdit) {
+      this.props.goCardPage();
+    }
+  }
+
   render() {
     return (
-      <div className={classNames('card', {dark: this.state.isChecked})}>
+      <div
+        className={classNames('card', {dark: this.state.isChecked})}
+        onDoubleClick={this.goCardPage}
+      >
         <CardHeader
           title={this.state.title}
           isEdit={this.state.isEdit}
@@ -89,4 +96,10 @@ Card.propTypes = {
   removeCard: PropTypes.func
 }
 
-export default withLoadingDelay(Card);
+const mapStateToProps = state => {
+  return {
+    onlyView: state.onlyView
+  };
+}
+
+export default connect(mapStateToProps)(withLoadingDelay(Card));

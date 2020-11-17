@@ -117,12 +117,12 @@ class SignInPage extends Component {
             touched={formElement.config.touched}
             changed={(event) => this.inputChangedHandler(event, formElement.id)} />
         ))}
-        <button disabled={!this.state.formIsValid} className="sign-in-page-form-btn">Войти</button>
+        <button disabled={!this.state.formIsValid} className="btn">Войти</button>
       </form>
     );
 
     return (
-      <div className="page sign-in-page">
+      <div className="sign-in-page">
         <div className="card sign-in-page-form-wrap">
           <h2 className="sign-in-page-form-title">Sign in</h2>
           <hr className="card-sep"/>
