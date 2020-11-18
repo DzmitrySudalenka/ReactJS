@@ -3,6 +3,7 @@ import CardsList from "../../components/Cards";
 import Checkbox from "../../components/UI/Checkbox";
 import {connect} from "react-redux";
 import {FaPlus, FaRegTrashAlt} from "react-icons/fa";
+import {changeOnlyView, addCard, removeCards} from "../../store/actions";
 import "./CardsPage.css";
 
 const CardsPage = (props) => {
@@ -13,15 +14,15 @@ const CardsPage = (props) => {
           <Checkbox
             className="cards-page-control-checkbox-view"
             checked={props.onlyView}
-            onChange={props.onChange}
+            onChange={props.changeOnlyView}
           />
           <span className="cards-page-control-text">Только просмотр</span>
         </label>
-        <div className="cards-page-control" onClick={props.onAdd}>
+        <div className="cards-page-control" onClick={props.addCard}>
           <FaPlus className="cards-page-control-icon cards-page-control-icon-add"/>
           <span className="cards-page-control-text">Создать новую карточку</span>
         </div>
-        <div className="cards-page-control" onClick={props.onRemove}>
+        <div className="cards-page-control" onClick={props.removeCards}>
           <FaRegTrashAlt className="cards-page-control-icon cards-page-control-icon-remove"/>
           <span className="cards-page-control-text">Удалить выбранные карточки</span>
         </div>
@@ -37,12 +38,10 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onChange: () => dispatch({type: 'CHANGE_ONLY_VIEW'}),
-    onAdd: () => dispatch({type: 'ADD_CARD'}),
-    onRemove: () => dispatch({type: 'REMOVE_CARDS'})
-  };
+const mapDispatchToProps = {
+  changeOnlyView,
+  addCard,
+  removeCards
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

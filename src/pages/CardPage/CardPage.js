@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Loader from "react-loader-spinner";
+import {changeContent} from "../../store/actions";
 import "./CardPage.css";
 
 const CardPage = (props) => {
@@ -48,7 +49,7 @@ const CardPage = (props) => {
   }
 
   function saveHandler() {
-    props.saveCard(cardId, title, text);
+    props.changeContent(cardId, title, text);
     setIsEdit(false);
   }
 
@@ -116,10 +117,8 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    saveCard: (id, title, text) => dispatch({type: 'CHANGE_CONTENT', id: id, title: title, text: text})
-  };
+const mapDispatchToProps = {
+  changeContent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardPage);

@@ -6,6 +6,7 @@ import CardsPage from "../pages/CardsPage";
 import CardPage from "../pages/CardPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import axios from "axios";
+import {loadCards} from "../store/actions";
 import "./App.css";
 
 class App extends Component {
@@ -63,10 +64,8 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadCards: (cards) => dispatch({type: 'LOAD_CARDS', cards: cards})
-  };
+const mapDispatchToProps = {
+  loadCards
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

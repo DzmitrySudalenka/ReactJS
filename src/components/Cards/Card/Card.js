@@ -40,7 +40,7 @@ class Card extends Component {
 
   checkHandler = () => {
     this.setState({isChecked: !this.state.isChecked});
-    this.props.removeCard(!this.state.isChecked);
+    this.props.cardToRemove(!this.state.isChecked);
   }
 
   saveHandler = () => {
