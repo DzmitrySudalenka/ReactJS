@@ -49,3 +49,19 @@
 .main-nav-list-item-link.active {
   text-decoration: underline;
 }
+.btn {
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  padding: 10px 40px;
+  margin-top: 20px;
+  background: salmon;
+  border: none;
+  border-radius: 22px;
+  outline: none;
+  align-self: center;
+}
+.btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}

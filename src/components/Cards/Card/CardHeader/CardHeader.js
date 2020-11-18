@@ -1,19 +1,17 @@
-import React, {Fragment, useContext} from 'react';
-import {CardContext} from "../../../../context";
+import React, {Fragment} from 'react';
 import {FaEdit, FaSave, FaRegWindowClose} from 'react-icons/fa';
 import './CardHeader.css';
+import {connect} from "react-redux";
 
 const CardHeader = (props) => {
 
   const {title, isEdit, isChecked, titleHandler, onCheck, onEdit, onSave, onCancel} = props;
 
-  const cardContext = useContext(CardContext);
-
   let cardTitle = <h3 className="card-title">{title}</h3>;
 
   let editControl;
 
-  if (!cardContext.onlyView) {
+  if (!props.onlyView) {
     editControl = <FaEdit className="card-control" onClick={onEdit} />;
   }
 
@@ -55,4 +53,10 @@ const CardHeader = (props) => {
 
 }
 
-export default CardHeader;
+const mapStateToProps = state => {
+  return {
+    onlyView: state.onlyView
+  };
+}
+
+export default connect(mapStateToProps)(CardHeader);
