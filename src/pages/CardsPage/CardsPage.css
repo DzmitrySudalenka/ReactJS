@@ -8,10 +8,6 @@
   display: flex;
   align-items: center;
 }
-.cards-page-control-checkbox-view {
-  position: relative;
-  top: 3px;
-}
 .cards-page-control-icon {
   color: salmon;
 }

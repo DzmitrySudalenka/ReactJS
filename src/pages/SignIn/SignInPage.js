@@ -1,12 +1,15 @@
 import React, {Component} from "react";
 import Input from "../../components/UI/Input";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import {auth} from "../../store/actions";
 import "./SignInPage.css";
 
 class SignInPage extends Component {
 
   state = {
     form: {
-      username: {
+      email: {
         elementType: 'input',
         elementConfig: {
           type: 'email',
@@ -36,10 +39,6 @@ class SignInPage extends Component {
       }
     },
     formIsValid: false
-  }
-
-  signInHandler = (event) => {
-    event.preventDefault();
   }
 
   checkValidity(value, rules) {
@@ -93,6 +92,11 @@ class SignInPage extends Component {
 
   }
 
+  signInHandler = (event) => {
+    event.preventDefault();
+    this.props.auth(this.state.form.email.value, this.state.form.password.value);
+  }
+
   render () {
 
     const formElementsArray = [];
@@ -121,8 +125,15 @@ class SignInPage extends Component {
       </form>
     );
 
+    let authRedirect = null;
+
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/" />;
+    }
+
     return (
       <div className="sign-in-page">
+        {authRedirect}
         <div className="card sign-in-page-form-wrap">
           <h2 className="sign-in-page-form-title">Sign in</h2>
           <hr className="card-sep"/>
@@ -135,4 +146,14 @@ class SignInPage extends Component {
 
 }
 
-export default SignInPage;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.user !== null
+  };
+};
+
+const mapDispatchToProps = {
+  auth
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

@@ -1,0 +1,17 @@
+.settings-page-title {
+  text-align: center;
+}
+.settings-page-control {
+  font-weight: bold;
+  margin-left: 20px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+.settings-page-control-checkbox-view {
+  position: relative;
+  top: 3px;
+}
+.settings-page-control-text {
+  margin-left: 10px;
+}

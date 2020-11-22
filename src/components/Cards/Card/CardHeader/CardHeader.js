@@ -55,7 +55,7 @@ const CardHeader = (props) => {
 
 const mapStateToProps = state => {
   return {
-    onlyView: state.onlyView
+    onlyView: state.cards.onlyView
   };
 }
 
