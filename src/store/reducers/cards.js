@@ -1,4 +1,4 @@
-import * as actionTypes from './types';
+import * as actionTypes from '../actions/types';
 
 const initialState = {
   cards: [],
@@ -8,7 +8,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOAD_CARDS:
+    case actionTypes.SET_CARDS:
       return {
         ...state,
         cards: action.cards

@@ -5,32 +5,49 @@ import SignInPage from "../pages/SignIn";
 import CardsPage from "../pages/CardsPage";
 import CardPage from "../pages/CardPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import axios from "axios";
-import {loadCards} from "../store/actions";
+import Logout from "../pages/SignIn/Logout/Logout";
+import {authCheckState, loadCards} from "../store/actions";
+import Settings from "../pages/Settings";
 import "./App.css";
 
 class App extends Component {
 
   componentDidMount() {
-    axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
-      .then(response => {
-        const cards = response.data.slice(0, 15);
-        const updatedCards = cards.map(card => {
-          return {
-            id: card.Number,
-            headerText: card.Name,
-            bodyText: card.About
-          }
-        });
-        this.props.loadCards(updatedCards);
-      });
+    this.props.authCheckState();
+    this.props.loadCards();
   }
 
   render() {
+
+    let welcomeString = '';
+
+    let logoutRoute = null;
+
+    let authLink = <NavLink to="/sign-in" className="main-nav-list-item-link">Sign in</NavLink>;
+
+    let settingsRoute = null;
+
+    if (this.props.user) {
+
+      welcomeString = `Приветствую ${this.props.user}`;
+
+      logoutRoute = <Route path="/logout" component={Logout} />;
+
+      authLink = <NavLink to="/logout" className="main-nav-list-item-link">Выйти</NavLink>;
+
+      if (this.props.isAdmin) {
+
+        settingsRoute = <Route path="/settings" component={Settings} />;
+
+      }
+
+    }
+
     return (
       <div className="App">
         <header className="App-header">
           <div className="App-header-title-wrap">
+            <div className="App-header-welcome">{welcomeString}</div>
             <h1 className="App-header-title">ReactJS</h1>
             <div className="cards-counter">{this.props.ctr}</div>
           </div>
@@ -39,8 +56,13 @@ class App extends Component {
               <li className="main-nav-list-item">
                 <NavLink to="/" exact className="main-nav-list-item-link">Home</NavLink>
               </li>
+              {this.props.isAdmin &&
+                <li className="main-nav-list-item">
+                  <NavLink to="/settings" exact className="main-nav-list-item-link">Settings</NavLink>
+                </li>
+              }
               <li className="main-nav-list-item">
-                <NavLink to="/sign-in" className="main-nav-list-item-link">Sign in</NavLink>
+                {authLink}
               </li>
             </ul>
           </nav>
@@ -48,8 +70,10 @@ class App extends Component {
         <main className="App-content">
           <Switch>
             <Route path="/" exact component={CardsPage} />
-            <Route path="/sign-in" component={SignInPage} />
             <Route path="/card/:id" component={CardPage} />
+            <Route path="/sign-in" component={SignInPage} />
+            {logoutRoute}
+            {settingsRoute}
             <Route render={NotFoundPage} />
           </Switch>
         </main>
@@ -60,11 +84,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    ctr: state.cards.length
+    ctr: state.cards.cards.length,
+    user: state.auth.user,
+    isAdmin: state.auth.isAdmin
   };
 }
 
 const mapDispatchToProps = {
+  authCheckState,
   loadCards
 }
 

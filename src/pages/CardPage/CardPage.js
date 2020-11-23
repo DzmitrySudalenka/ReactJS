@@ -113,7 +113,7 @@ const CardPage = (props) => {
 
 const mapStateToProps = state => {
   return {
-    cards: state.cards
+    cards: state.cards.cards
   };
 }
 

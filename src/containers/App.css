@@ -11,12 +11,19 @@
 .App-header-title-wrap {
   display: flex;
   align-items: center;
+  position: relative;
+}
+.App-header-welcome {
+  font-size: 20px;
+  font-weight: 500;
+  color: salmon;
+  position: absolute;
+  top: 42px;
 }
 .App-header-title {
   font-size: 48px;
   flex-grow: 1;
   margin: 20px 0 10px;
-  padding-left: 38px;
 }
 .cards-counter {
   font-size: 22px;
@@ -27,8 +34,9 @@
   line-height: 1;
   border-radius: .25rem;
   transition: color .15s;
-  position: relative;
-  top: 12px;
+  position: absolute;
+  top: 42px;
+  right: 0px;
 }
 .main-nav-list {
   list-style: none;

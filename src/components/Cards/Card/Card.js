@@ -98,7 +98,7 @@ Card.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    onlyView: state.onlyView
+    onlyView: state.cards.onlyView
   };
 }
 
