@@ -102,4 +102,5 @@ const mapStateToProps = state => {
   };
 }
 
+export {Card, mapStateToProps};
 export default connect(mapStateToProps)(withLoadingDelay(Card));

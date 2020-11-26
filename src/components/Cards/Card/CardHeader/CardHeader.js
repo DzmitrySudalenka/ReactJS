@@ -59,4 +59,5 @@ const mapStateToProps = state => {
   };
 }
 
+export {CardHeader, mapStateToProps};
 export default connect(mapStateToProps)(CardHeader);
